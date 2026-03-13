@@ -12,7 +12,7 @@ class GuestbookHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = urlparse(self.path).path
 
-        if path in ('/', '/index.html'):
+        if path in ('/', '/home', '/index.html'):
             self.serve_index()
         elif path == '/write.html':
             self.serve_file('write.html')

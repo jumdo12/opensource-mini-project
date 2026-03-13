@@ -98,11 +98,23 @@
         <header>
             <h1>📖 방명록</h1>
             <p>방문해 주셔서 감사합니다. 한 마디 남겨주세요!</p>
-            <a href="/write.html" class="btn-write">✏️ 글 남기기</a>
+            <a href="/write" class="btn-write">✏️ 글 남기기</a>
         </header>
 
         <div class="entries">
-            {{entries}}
+            {% if entries %}
+                {% for e in entries %}
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-name">{{ e.name }}</span>
+                        <span class="entry-date">{{ e.date }}</span>
+                    </div>
+                    <p class="entry-message">{{ e.message }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty">아직 방명록이 없습니다. 첫 번째로 남겨보세요!</p>
+            {% endif %}
         </div>
     </div>
 </body>

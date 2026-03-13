@@ -1,10 +1,11 @@
 # opensource-mini-project
 
-순수 파이썬과 HTML만으로 만든 간단한 방명록 웹페이지입니다.
+Flask로 만든 간단한 방명록 웹페이지입니다.
 
 ## 실행 방법
 
 ```bash
+pip install -r requirements.txt
 python server.py
 ```
 
@@ -13,15 +14,26 @@ python server.py
 ## 구조
 
 ```
-├── server.py          # HTTP 서버
+├── server.py          # Flask 서버
+├── requirements.txt   # 의존성 목록
 └── templates/
     ├── index.html     # 방명록 목록
     ├── write.html     # 글쓰기
     └── success.html   # 등록 완료
 ```
 
+## 엔드포인트
+
+| 경로 | 설명 |
+|------|------|
+| `/` | 방명록 목록 |
+| `/home` | 방명록 목록 (동일) |
+| `/write` | 글쓰기 페이지 |
+| `/submit` | 글 등록 (POST) |
+| `/success` | 등록 완료 페이지 |
+
 ## 특징
 
-- 외부 라이브러리 없음 (표준 라이브러리만 사용)
+- Flask 기반 웹 서버
 - 방명록 데이터는 인메모리 리스트로 관리 (서버 재시작 시 초기화)
 - Python 3.x 이상 필요

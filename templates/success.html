@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록 완료</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 48px 36px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #2d6a4f;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .btn-home {
+            background: #2d6a4f;
+            color: #fff;
+        }
+
+        .btn-home:hover { background: #1b4332; }
+
+        .btn-write {
+            background: #eee;
+            color: #555;
+        }
+
+        .btn-write:hover { background: #ddd; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">🎉</div>
+        <h1>등록 완료!</h1>
+        <p>방명록이 성공적으로 등록되었습니다.<br>소중한 한 마디 감사합니다.</p>
+        <div class="btn-row">
+            <a href="/" class="btn btn-home">목록 보기</a>
+            <a href="/write.html" class="btn btn-write">또 쓰기</a>
+        </div>
+    </div>
+</body>
+</html>

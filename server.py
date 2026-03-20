@@ -22,12 +22,14 @@ def submit():
     name = request.form.get('name', '').strip()
     message = request.form.get('message', '').strip()
 
-    if name and message:
-        guestbook_entries.append({
-            'name': name,
-            'message': message,
-            'date': datetime.now().strftime('%Y-%m-%d %H:%M'),
-        })
+    if not name or not message or len(name) > 20 or len(message) > 200:
+        return redirect(url_for('write'))
+
+    guestbook_entries.append({
+        'name': name,
+        'message': message,
+        'date': datetime.now().strftime('%Y-%m-%d %H:%M'),
+    })
 
     return redirect(url_for('success'))
 

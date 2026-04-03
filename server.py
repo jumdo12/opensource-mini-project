@@ -1,15 +1,43 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
+from dataclasses import dataclass
+from typing import List
 
 app = Flask(__name__)
 
-guestbook_entries = []
+# Configuration constants
+MAX_NAME_LENGTH = 20
+MAX_MESSAGE_LENGTH = 200
+
+@dataclass
+class GuestbookEntry:
+    name: str
+    message: str
+    date: str
+
+    @classmethod
+    def create(cls, name: str, message: str) -> 'GuestbookEntry':
+        return cls(
+            name=name.strip(),
+            message=message.strip(),
+            date=datetime.now().strftime('%Y-%m-%d %H:%M')
+        )
+
+    def to_dict(self) -> dict:
+        return {
+            'name': self.name,
+            'message': self.message,
+            'date': self.date
+        }
+
+guestbook_entries: List[GuestbookEntry] = []
 
 
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template('index.html', entries=list(reversed(guestbook_entries)))
+    entries_as_dicts = [entry.to_dict() for entry in reversed(guestbook_entries)]
+    return render_template('index.html', entries=entries_as_dicts)
 
 
 @app.route('/write')
@@ -22,14 +50,11 @@ def submit():
     name = request.form.get('name', '').strip()
     message = request.form.get('message', '').strip()
 
-    if not name or not message or len(name) > 20 or len(message) > 200:
+    if not name or not message or len(name) > MAX_NAME_LENGTH or len(message) > MAX_MESSAGE_LENGTH:
         return redirect(url_for('write'))
 
-    guestbook_entries.append({
-        'name': name,
-        'message': message,
-        'date': datetime.now().strftime('%Y-%m-%d %H:%M'),
-    })
+    entry = GuestbookEntry.create(name, message)
+    guestbook_entries.append(entry)
 
     return redirect(url_for('success'))
 

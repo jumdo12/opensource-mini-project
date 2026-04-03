@@ -38,8 +38,8 @@ class TestSubmitValidation:
     def test_유효한_입력_제출시_방명록에_추가됨(self, client):
         client.post('/submit', data={'name': '홍길동', 'message': '안녕하세요'})
         assert len(guestbook_entries) == 1
-        assert guestbook_entries[0]['name'] == '홍길동'
-        assert guestbook_entries[0]['message'] == '안녕하세요'
+        assert guestbook_entries[0].name == '홍길동'
+        assert guestbook_entries[0].message == '안녕하세요'
 
     def test_유효하지_않은_입력_제출시_방명록에_추가되지_않음(self, client):
         client.post('/submit', data={'name': '', 'message': '안녕하세요'})

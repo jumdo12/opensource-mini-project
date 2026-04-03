@@ -1,62 +1,62 @@
-# Code Smells Analysis
+# 코드 스멜 분석 보고서
 
-## Identified Code Smells
+## 식별된 코드 스멜
 
-### 1. **Global State (Data Clump)**
-- **Location:** `server.py:6`
-- **Code:** `guestbook_entries = []`
-- **Description:** Using a global list to store application data
-- **Why it's a smell:**
-  - Makes code harder to test, debug, and scale
-  - Creates hidden dependencies between functions
-  - Makes the application non-thread-safe
-  - Data is lost when server restarts
-  - Violates encapsulation principles
+### 1. **전역 상태 (Global State)**
+- **위치:** `server.py:6`
+- **코드:** `guestbook_entries = []`
+- **설명:** 애플리케이션 데이터를 저장하기 위해 전역 리스트 사용
+- **왜 코드 스멜인가:**
+  - 테스트, 디버깅, 확장을 어렵게 만듦
+  - 함수 간 숨겨진 의존성 생성
+  - 애플리케이션을 스레드-안전하지 않게 만듦
+  - 서버 재시작 시 데이터 손실
+  - 캡슐화 원칙 위반
 
-### 2. **Magic Numbers**
-- **Location:** `server.py:25`
-- **Code:** `len(name) > 20 or len(message) > 200`
-- **Description:** Hard-coded validation limits scattered in code
-- **Why it's a smell:**
-  - Makes business rules difficult to maintain and modify
-  - If requirements change, need to hunt down all occurrences
-  - No central place to manage configuration
-  - Reduces code readability and maintainability
+### 2. **매직 넘버 (Magic Numbers)**
+- **위치:** `server.py:25`
+- **코드:** `len(name) > 20 or len(message) > 200`
+- **설명:** 코드 곳곳에 하드코딩된 검증 제한값들
+- **왜 코드 스멜인가:**
+  - 비즈니스 규칙을 유지보수하고 수정하기 어려움
+  - 요구사항 변경 시 모든 발생 위치를 찾아야 함
+  - 설정을 관리할 중앙 집중화된 곳이 없음
+  - 코드 가독성과 유지보수성 감소
 
-### 3. **Long Method with Multiple Responsibilities**
-- **Location:** `server.py:21-34` (submit function)
-- **Code:** 14-line function handling validation, processing, and response
-- **Description:** The submit function handles form validation, data processing, and response logic
-- **Why it's a smell:**
-  - Violates Single Responsibility Principle
-  - Makes the function harder to test individual aspects
-  - Difficult to understand and modify
-  - Changes to validation logic require touching data storage logic
+### 3. **다중 책임을 가진 긴 메서드**
+- **위치:** `server.py:21-34` (submit 함수)
+- **코드:** 검증, 처리, 응답을 모두 담당하는 14줄 함수
+- **설명:** submit 함수가 폼 검증, 데이터 처리, 응답 로직을 모두 처리
+- **왜 코드 스멜인가:**
+  - 단일 책임 원칙 위반
+  - 개별 측면을 테스트하기 어려움
+  - 이해하고 수정하기 어려움
+  - 검증 로직 변경 시 데이터 저장 로직도 건드려야 함
 
-### 4. **Primitive Obsession**
-- **Location:** `server.py:28-32`
-- **Code:** Using raw dictionaries for guestbook entries
-- **Description:** Using primitive data structures instead of proper domain objects
-- **Why it's a smell:**
-  - No type safety or validation
-  - No encapsulation of behavior
-  - Easy to make mistakes with key names
-  - No clear interface or contract for data structure
+### 4. **원시 타입 강박 (Primitive Obsession)**
+- **위치:** `server.py:28-32`
+- **코드:** 방명록 엔트리에 원시 딕셔너리 사용
+- **설명:** 적절한 도메인 객체 대신 원시 데이터 구조 사용
+- **왜 코드 스멜인가:**
+  - 타입 안전성이나 검증 없음
+  - 동작의 캡슐화 없음
+  - 키 이름으로 실수하기 쉬움
+  - 데이터 구조에 대한 명확한 인터페이스나 계약 없음
 
-### 5. **Duplicate Code in Tests**
-- **Location:** `tests/test_validation.py:13-56`
-- **Code:** Repetitive test structure with similar assertions
-- **Description:** Multiple tests with nearly identical setup and assertion patterns
-- **Why it's a smell:**
-  - Code duplication makes tests harder to maintain
-  - When assertion logic changes, multiple tests need updating
-  - Inconsistent language use (Korean test names, English code)
-  - Violates DRY (Don't Repeat Yourself) principle
+### 5. **테스트 코드 중복**
+- **위치:** `tests/test_validation.py:13-56`
+- **코드:** 유사한 assertion을 가진 반복적인 테스트 구조
+- **설명:** 거의 동일한 설정과 assertion 패턴을 가진 다수의 테스트
+- **왜 코드 스멜인가:**
+  - 코드 중복으로 테스트 유지보수가 어려움
+  - assertion 로직 변경 시 여러 테스트를 업데이트해야 함
+  - 언어 사용 불일치 (한국어 테스트 이름, 영어 코드)
+  - DRY(Don't Repeat Yourself) 원칙 위반
 
-## Impact Assessment
-These smells collectively make the codebase:
-- Harder to maintain and extend
-- More prone to bugs
-- Difficult to test comprehensively
-- Less readable and understandable
-- Not suitable for production environments
+## 영향 평가
+이러한 스멜들은 집합적으로 코드베이스를 다음과 같게 만듦:
+- 유지보수와 확장이 어려움
+- 버그에 더 취약함
+- 포괄적인 테스트가 어려움
+- 가독성과 이해가 어려움
+- 프로덕션 환경에 적합하지 않음

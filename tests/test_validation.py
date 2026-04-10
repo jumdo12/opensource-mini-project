@@ -5,7 +5,7 @@
 - 유효하지 않으면 /write 로 리다이렉트
 - 유효하면 /success 로 리다이렉트 + 방명록에 추가
 """
-from server import guestbook_entries
+from app.server import guestbook_entries
 
 
 class TestSubmitValidation:

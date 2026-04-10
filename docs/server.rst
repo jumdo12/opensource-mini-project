@@ -1,7 +1,7 @@
 server 모듈
 ===========
 
-.. automodule:: server
+.. automodule:: app.server
    :members:
    :undoc-members:
    :show-inheritance:

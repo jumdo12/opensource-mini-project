@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from typing import List
 from flasgger import Swagger
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 swagger = Swagger(app)
 
 # Configuration constants
@@ -127,8 +127,3 @@ def success():
         str: 등록 완료 메시지가 포함된 HTML 응답.
     """
     return render_template('success.html')
-
-
-if __name__ == '__main__':
-    print('서버 실행 중 → http://localhost:8080')
-    app.run(host='localhost', port=8080, debug=True)

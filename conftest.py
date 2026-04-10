@@ -1,5 +1,5 @@
 import pytest
-from server import app, guestbook_entries
+from app.server import app, guestbook_entries
 
 
 @pytest.fixture

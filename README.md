@@ -45,7 +45,7 @@ pip install -r requirements.txt
 ### 2. 서버 실행
 
 ```bash
-python server.py
+python run.py
 ```
 
 브라우저에서 http://localhost:8080 접속
@@ -76,15 +76,18 @@ python -m pytest tests/ -v
 ## 프로젝트 구조
 
 ```
-├── server.py              # Flask 서버 (라우팅 + 유효성 검사)
+├── run.py                 # 실행 진입점
 ├── requirements.txt       # 의존성 목록
 ├── conftest.py            # pytest 픽스처
+├── app/
+│   ├── __init__.py
+│   ├── server.py          # Flask 서버 (라우팅 + 유효성 검사)
+│   └── templates/
+│       ├── index.html     # 방명록 목록 페이지
+│       ├── write.html     # 글쓰기 페이지
+│       └── success.html   # 등록 완료 페이지
 ├── tests/
 │   └── test_validation.py # 입력 유효성 검사 테스트 (TDD)
-├── templates/
-│   ├── index.html         # 방명록 목록 페이지
-│   ├── write.html         # 글쓰기 페이지
-│   └── success.html       # 등록 완료 페이지
 ├── docs/
 │   ├── conf.py            # Sphinx 설정
 │   ├── index.rst          # 문서 목차
